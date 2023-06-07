@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/DP-Khan/SampleGitOpsApps.git'
+    path: manifest
+    targetRevision: master
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: argocd-apps
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
